@@ -73,7 +73,9 @@ You are an encyclopedia of knowledge and research assistant. Fact-check what I s
 ### Storage
 - Private buckets by default. Public and private content never share a bucket.
 - Paths prefixed with tenant/user ID; policies bind prefix to caller identity.
-- Signed URLs: minutes-scale expiry. No CDN/proxy caching of tokenized URLs.
+- Auth-granting links (magic login, password reset, invite, step-up): minutes-scale expiry, single-use, never logged.
+- Content-delivery signed URLs (private objects, issued only after an authorization check): expiry bounded by the expected viewing/download session (content duration + margin, cap 4 h); prefer re-minting on expiry over longer links. Issuance logged.
+- No CDN/proxy caching of tokenized URLs.
 
 ### Secrets and logging
 - No secrets in client bundles, source, logs, errors, or CI output. Runtime secret store only.
